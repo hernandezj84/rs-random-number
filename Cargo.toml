@@ -1,5 +1,5 @@
 [package]
-name = "random-number-rs"
+name = "rs-random-number"
 version = "0.1.0"
 edition = "2021"
 
