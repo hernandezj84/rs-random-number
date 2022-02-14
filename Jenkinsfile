@@ -14,12 +14,14 @@ pipeline {
                 }
             }
         }
-        stage('Run rust project') {
+        stage('Build and push') {
             steps {
                 script {
-                    sh """
-                        /home/jenkins/.cargo/bin/cargo run
-                    """
+                    def app = docker.build("devopsuae/rs-random-number")
+                    docker.withRegistry("https://registry.hub.docker.com", "dockerhub") {
+                        app.push("${env.BUILD_NUMBER}")
+                        app.push("latest")
+                    }
                 }
             }
         }
